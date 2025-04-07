@@ -1,0 +1,37 @@
+Dinvit_BackEnd
+│   package.json
+│   tsconfig.json
+│   .env
+│   swagger.yaml
+└───src
+    │   app.ts
+    │   server.ts
+    ├───config
+    │       db.ts
+    ├───controllers
+    │       auth.controller.ts
+    │       event.controller.ts
+    │       invitation.controller.ts
+    ├───models
+    │       user.model.ts
+    │       event.model.ts
+    │       invitation.model.ts
+    ├───routes
+    │       auth.routes.ts
+    │       event.routes.ts
+    │       invitation.routes.ts
+    ├───middlewares
+    │       auth.middleware.ts
+    │       error.middleware.ts
+    │       validation.middleware.ts
+    ├───dtos
+    │       auth.dto.ts
+    │       event.dto.ts
+    │       invitation.dto.ts
+    ├───utils
+    │       jwt.ts
+    │       logger.ts
+    └───services
+            auth.service.ts
+            event.service.ts
+            invitation.service.ts

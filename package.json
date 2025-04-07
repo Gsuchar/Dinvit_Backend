@@ -1,0 +1,38 @@
+{
+    "name": "Dinvit_BackEnd",
+    "version": "1.0.0",
+    "description": "Backend para plataforma de invitaciones digitales",
+    "main": "dist/server.js",
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/server.js",
+        "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+    },
+    "dependencies": {
+        "@types/bcryptjs": "^2.4.6",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "joi": "^17.6.0",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^7.0.3",
+        "nodemailer": "^6.10.0",
+        "passport": "^0.6.0",
+        "passport-jwt": "^4.0.1",
+        "socket.io": "^4.6.1",
+        "swagger-ui-express": "^4.6.3",
+        "yamljs": "^0.3.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.17",
+        "@types/mongoose": "^5.11.97",
+        "@types/node": "^22.0.0",
+        "@types/nodemailer": "^6.4.17",
+        "@types/passport-jwt": "^3.0.8",
+        "@types/swagger-ui-express": "^4.1.8",
+        "@types/yamljs": "^0.2.34",
+        "ts-node-dev": "^2.0.0",
+        "typescript": "^5.0.4"
+    }
+}

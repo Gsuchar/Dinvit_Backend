@@ -1,0 +1,178 @@
+openapi: 3.0.0
+info:
+  title: Plataforma de Invitaciones Digitales API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:5000
+paths:
+  /api/auth/register:
+    post:
+      summary: Registro de usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+                  enum: [admin, guest]
+              required:
+                - username
+                - email
+                - password
+      responses:
+        '201':
+          description: Usuario registrado exitosamente
+  /api/auth/login:
+    post:
+      summary: Login de usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Token de autenticación
+  /api/events:
+    post:
+      summary: Crear un evento
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                template:
+                  type: string
+              required:
+                - title
+                - date
+      responses:
+        '201':
+          description: Evento creado
+    get:
+      summary: Listar eventos
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de eventos
+  /api/invitations:
+    post:
+      summary: Crear una invitación
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event:
+                  type: string
+                title:
+                  type: string
+                honoree:
+                  type: string
+                date:
+                  type: string
+                  format: date
+                time:
+                  type: string
+                location:
+                  type: string
+                dressCode:
+                  type: string
+                agenda:
+                  type: string
+                uniqueLink:
+                  type: string
+                music:
+                  type: string
+                images:
+                  type: array
+                  items:
+                    type: string
+                language:
+                  type: string
+                  enum: [es, en, pt]
+              required:
+                - event
+                - title
+                - honoree
+                - date
+                - time
+                - location
+                - uniqueLink
+      responses:
+        '201':
+          description: Invitación creada
+  /api/invitations/{id}/rsvp:
+    post:
+      summary: Confirmar asistencia (RSVP)
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID de la invitación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                guests:
+                  type: integer
+                allergies:
+                  type: string
+                suggestions:
+                  type: string
+              required:
+                - name
+                - email
+                - guests
+      responses:
+        '200':
+          description: RSVP actualizado
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
