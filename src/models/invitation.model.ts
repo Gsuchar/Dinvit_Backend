@@ -23,6 +23,82 @@ export interface IInvitation extends Document {
 
   images?: string[];
 
+  // Las confirmaciones de asistencia (RSVP, sera guestaction.model.ts) y sugerencias de música
+  // se gestionan en un modelo separado: rsvp.model.ts (RSVP, sera guestaction.model.ts)
+}
+
+const InvitationSchema: Schema = new Schema(
+  {
+    uniqueLink: { type: String, required: true, unique: true },
+
+    invitationDetails: {
+      title: { type: String, required: true },
+      celebrated: { type: String, required: true },
+      date: { type: Date, required: true },
+      time: { type: String, required: true },
+      location: {
+        name: { type: String, required: true },
+        address: { type: String, required: true },
+        city: { type: String, required: true },
+        country: { type: String, required: true }
+      },
+      dressCode: { type: String },
+      notes: { type: String },
+      music: { type: String },
+      language: {
+        type: String,
+        enum: ['es', 'en', 'pt'],
+        default: 'es'
+      }
+    },
+
+    images: [{ type: String }]
+  },
+  { timestamps: true }
+);
+
+export default mongoose.model<IInvitation>('Invitation', InvitationSchema);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import mongoose, { Schema, Document } from 'mongoose';
+
+export interface IInvitation extends Document {
+  _id: mongoose.Types.ObjectId;
+  uniqueLink: string;
+
+  invitationDetails: {
+    title: string;
+    celebrated: string;
+    date: Date;
+    time: string;
+    location: {
+      name: string;
+      address: string;
+      city: string;
+      country: string;
+    };
+    dressCode?: string;
+    notes?: string;
+    music?: string;
+    language: 'es' | 'en' | 'pt';
+  };
+
+  images?: string[];
+
   rsvp?: {
     name: string;
     email: string;
@@ -93,7 +169,7 @@ const InvitationSchema: Schema = new Schema(
 );
 
 export default mongoose.model<IInvitation>('Invitation', InvitationSchema);
-
+*/
 
 
 
