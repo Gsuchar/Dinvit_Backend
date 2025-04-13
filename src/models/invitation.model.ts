@@ -5,33 +5,33 @@ export interface IInvitation extends Document {
   userId: mongoose.Types.ObjectId;
   templateId: mongoose.Types.ObjectId;
   uniqueLink: string;
-  invitationDetails: {
-    title: string;
-    honoree: string;
-    welcomeText?: string;
-    date: Date;
-    time: string;
-    location: {
-      name: string;
-      address: string;
-      city: string;
-      country: string;
-      location?: string;
-    };
-    dressCode?: string;
-    language: 'es' | 'en' | 'pt';
-    music?: string;
+  title: string;
+  honoree: string;
+  welcomeText?: string;
+  date: Date;
+  time: string;
+  location: {
+    name: string;
+    address: string;
+    city: string;
+    country: string;
+    location?: string; // Coordenadas o string para Google Maps
   };
-  images: string[];
-  availableSections: {
+  dressCode?: string;
+  language: 'es' | 'en' | 'pt';
+  music?: string;
+  active: {
     gallery: boolean;
     countDown: boolean;
     musicSuggestion: boolean;
     giftSuggestion: boolean;
     notes: boolean;
-    notesText: string;
+    dressCode: boolean;
+    social: boolean;
   };
-  expiresAt?: Date;
+  notesText?: string;
+  images: string[];
+  expiresAt: Date;
   status?: 'active' | 'expired' | 'archived';
   createdAt: Date;
   updatedAt: Date;
@@ -50,37 +50,37 @@ const InvitationSchema: Schema = new Schema(
       required: true
     },
     uniqueLink: { type: String, required: true, unique: true },
-    invitationDetails: {
-      title: { type: String, required: true },
-      honoree: { type: String, required: true },
-      welcomeText: { type: String },
-      date: { type: Date, required: true },
-      time: { type: String, required: true },
-      location: {
-        name: { type: String, required: true },
-        address: { type: String, required: true },
-        city: { type: String, required: true },
-        country: { type: String, required: true },
-        location: { type: String }
-      },
-      dressCode: { type: String },
-      language: {
-        type: String,
-        enum: ['es', 'en', 'pt'],
-        default: 'es'
-      },
-      music: { type: String }
+    title: { type: String, required: true },
+    honoree: { type: String, required: true },
+    welcomeText: { type: String },
+    date: { type: Date, required: true },
+    time: { type: String, required: true },
+    location: {
+      name: { type: String, required: true },
+      address: { type: String, required: true },
+      city: { type: String, required: true },
+      country: { type: String, required: true },
+      location: { type: String }
     },
-    images: [{ type: String }],
-    availableSections: {
+    dressCode: { type: String },
+    language: {
+      type: String,
+      enum: ['es', 'en', 'pt'],
+      default: 'es'
+    },
+    music: { type: String },
+    active: {
       gallery: { type: Boolean, default: true },
       countDown: { type: Boolean, default: true },
       musicSuggestion: { type: Boolean, default: true },
       giftSuggestion: { type: Boolean, default: true },
       notes: { type: Boolean, default: true },
-      notesText: { type: String, default: '' }
+      dressCode: { type: Boolean, default: true },
+      social: { type: Boolean, default: true }
     },
-    expiresAt: { type: Date },
+    notesText: { type: String, default: '' },
+    images: [{ type: String }],
+    expiresAt: { type: Date, required: true },
     status: {
       type: String,
       enum: ['active', 'expired', 'archived'],

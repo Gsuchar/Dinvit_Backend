@@ -3,8 +3,9 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface IToken extends Document {
   _id: mongoose.Types.ObjectId;
   token: string;
-  invitationId: mongoose.Types.ObjectId;
-  type: 'access' | 'edit' | 'rsvp' | 'view';
+  type: 'access' | 'edit' | 'rsvp' | 'view' | 'recovery' | 'auth';
+  invitationId?: mongoose.Types.ObjectId;
+  userId?: mongoose.Types.ObjectId;
   expiresAt: Date;
   used?: boolean;
   createdAt: Date;
@@ -13,29 +14,24 @@ export interface IToken extends Document {
 
 const TokenSchema: Schema = new Schema(
   {
-    token: {
+    token: { type: String, required: true },
+    type: {
       type: String,
-      required: true,
-      unique: true
+      enum: ['access', 'edit', 'rsvp', 'view', 'recovery', 'auth'],
+      required: true
     },
     invitationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Invitation',
-      required: true
+      required: false
     },
-    type: {
-      type: String,
-      enum: ['access', 'edit', 'rsvp', 'view'],
-      default: 'access'
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: false
     },
-    expiresAt: {
-      type: Date,
-      required: true
-    },
-    used: {
-      type: Boolean,
-      default: false
-    }
+    expiresAt: { type: Date, required: true },
+    used: { type: Boolean, default: false }
   },
   { timestamps: true }
 );

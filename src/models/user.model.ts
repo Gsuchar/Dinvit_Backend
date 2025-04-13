@@ -7,7 +7,6 @@ export interface IUser extends Document {
   password?: string;
   role: 'admin' | 'user';
   plan: 'basic' | 'pro' | 'premium';
-  invitations: mongoose.Types.ObjectId[];
   authProvider: 'local' | 'google' | 'facebook';
   socialId?: string;
   resetPasswordToken?: string;
@@ -21,7 +20,7 @@ const UserSchema: Schema = new Schema(
   {
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String }, // opcional si login es por redes
+    password: { type: String },
     role: {
       type: String,
       enum: ['admin', 'user'],
@@ -32,10 +31,6 @@ const UserSchema: Schema = new Schema(
       enum: ['basic', 'pro', 'premium'],
       default: 'basic'
     },
-    invitations: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Invitation'
-    }],
     authProvider: {
       type: String,
       enum: ['local', 'google', 'facebook'],
@@ -50,22 +45,3 @@ const UserSchema: Schema = new Schema(
 );
 
 export default mongoose.model<IUser>('User', UserSchema);
-
-
-/*import mongoose, { Schema, Document } from 'mongoose';
-
-export interface IUser extends Document {
-  username: string;
-  email: string;
-  password: string;
-  role: 'admin' | 'guest';
-}
-
-const UserSchema: Schema = new Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  role: { type: String, enum: ['admin', 'guest'], default: 'guest' }
-}, { timestamps: true });
-
-export default mongoose.model<IUser>('User', UserSchema);*/
