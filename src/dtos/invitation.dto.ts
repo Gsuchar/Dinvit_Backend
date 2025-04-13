@@ -1,24 +1,55 @@
-import Joi from 'joi';
+import { z } from 'zod';
+import mongoose from 'mongoose';
 
-export const createInvitationSchema = Joi.object({
-  event: Joi.string().required(),
-  title: Joi.string().required(),
-  honoree: Joi.string().required(),
-  date: Joi.date().required(),
-  time: Joi.string().required(),
-  location: Joi.string().required(),
-  dressCode: Joi.string().optional(),
-  agenda: Joi.string().optional(),
-  uniqueLink: Joi.string().required(),
-  music: Joi.string().optional(),
-  images: Joi.array().items(Joi.string()).optional(),
-  language: Joi.string().valid('es', 'en', 'pt').optional()
+// ✅ DTO para crear una invitación
+export const CreateInvitationDTO = z.object({
+  userId: z.string().refine((id) => mongoose.Types.ObjectId.isValid(id), {
+    message: 'Invalid userId'
+  }),
+  templateId: z.string().refine((id) => mongoose.Types.ObjectId.isValid(id), {
+    message: 'Invalid templateId'
+  }),
+  uniqueLink: z.string().min(5),
+  title: z.string().min(1),
+  honoree: z.string().min(1),
+  welcomeText: z.string().optional(),
+  date: z.coerce.date(),
+  time: z.string(),
+  location: z.object({
+    name: z.string(),
+    address: z.string(),
+    city: z.string(),
+    country: z.string(),
+    location: z.string().optional()
+  }),
+  dressCode: z.string().optional(),
+  language: z.enum(['es', 'en', 'pt']),
+  music: z.string().optional(),
+  active: z.object({
+    gallery: z.boolean(),
+    countDown: z.boolean(),
+    musicSuggestion: z.boolean(),
+    giftSuggestion: z.boolean(),
+    notes: z.boolean(),
+    dressCode: z.boolean(),
+    social: z.boolean()
+  }),
+  notesText: z.string().optional(),
+  images: z.array(z.string()),
+  expiresAt: z.coerce.date(),
+  status: z.enum(['active', 'expired', 'archived']).optional()
 });
 
-export const rsvpSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().email().required(),
-  guests: Joi.number().integer().min(0).required(),
-  allergies: Joi.string().optional(),
-  suggestions: Joi.string().optional()
-});
+// ✅ Tipo inferido de TypeScript
+export type CreateInvitationDTOType = z.infer<typeof CreateInvitationDTO>;
+
+// ✏️ Para actualizar (todos los campos opcionales)
+export const UpdateInvitationDTO = CreateInvitationDTO.partial();
+export type UpdateInvitationDTOType = z.infer<typeof UpdateInvitationDTO>;
+
+// 🧾 Para respuestas del backend (opcional, si querés tenerlo separado de Mongoose)
+export type InvitationResponseDTO = CreateInvitationDTOType & {
+  _id: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
