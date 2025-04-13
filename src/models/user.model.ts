@@ -2,25 +2,31 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IUser extends Document {
   _id: mongoose.Types.ObjectId;
-  username: string;
+  name: string;
+  lastName: string;
+  username?: string;
   email: string;
-  password?: string;
+  phone: string;
+  password: string;
   role: 'admin' | 'user';
   plan: 'basic' | 'pro' | 'premium';
+  status: 'pending' | 'active' | 'banned' | 'inactive';
   authProvider: 'local' | 'google' | 'facebook';
   socialId?: string;
   resetPasswordToken?: string;
   resetPasswordExpires?: number;
-  isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
 
 const UserSchema: Schema = new Schema(
   {
-    username: { type: String, required: true },
+    name: { type: String, required: true },
+    lastName: { type: String, required: true },
+    username: { type: String },
     email: { type: String, required: true, unique: true },
-    password: { type: String },
+    phone: { type: String, required: true },
+    password: { type: String, required: true },
     role: {
       type: String,
       enum: ['admin', 'user'],
@@ -31,6 +37,11 @@ const UserSchema: Schema = new Schema(
       enum: ['basic', 'pro', 'premium'],
       default: 'basic'
     },
+    status: {
+      type: String,
+      enum: ['pending', 'active', 'banned', 'inactive'],
+      default: 'pending'
+    },
     authProvider: {
       type: String,
       enum: ['local', 'google', 'facebook'],
@@ -38,8 +49,7 @@ const UserSchema: Schema = new Schema(
     },
     socialId: { type: String },
     resetPasswordToken: { type: String },
-    resetPasswordExpires: { type: Number },
-    isActive: { type: Boolean, default: true }
+    resetPasswordExpires: { type: Number }
   },
   { timestamps: true }
 );

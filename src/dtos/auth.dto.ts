@@ -1,17 +1,43 @@
-import Joi from 'joi';
+import { z } from 'zod';
 
-export const registerSchema = Joi.object({
-  username: Joi.string().required(),
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
-  role: Joi.string().valid('admin', 'guest')
+// 🔐 Registro de usuario local
+export const RegisterDTO = z.object({
+  name: z.string().min(2).max(30),
+  lastName: z.string().min(2).max(30),
+  email: z.string().email(),
+  phone: z.string().min(5),
+  password: z.string().min(6),
+  plan: z.enum(['basic', 'pro', 'premium']).optional()
 });
 
-export const loginSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().required()
+export type RegisterDTOType = z.infer<typeof RegisterDTO>;
+
+// 🔓 Login con email y contraseña
+export const LoginDTO = z.object({
+  email: z.string().email(),
+  password: z.string().min(6)
 });
 
-export const forgotPasswordSchema = Joi.object({
-  email: Joi.string().email().required()
+export type LoginDTOType = z.infer<typeof LoginDTO>;
+
+// 📧 Solicitar recuperación de contraseña
+export const ForgotPasswordDTO = z.object({
+  email: z.string().email()
 });
+
+export type ForgotPasswordDTOType = z.infer<typeof ForgotPasswordDTO>;
+
+// 🔑 Resetear contraseña con token
+export const ResetPasswordDTO = z.object({
+  token: z.string().min(10),
+  newPassword: z.string().min(6)
+});
+
+export type ResetPasswordDTOType = z.infer<typeof ResetPasswordDTO>;
+
+// ✅ Verificación de email mediante token
+export const VerifyEmailDTO = z.object({
+  token: z.string().min(10)
+});
+
+export type VerifyEmailDTOType = z.infer<typeof VerifyEmailDTO>;

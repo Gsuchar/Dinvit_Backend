@@ -20,7 +20,7 @@ export const CreateInvitationDTO = z.object({
     address: z.string(),
     city: z.string(),
     country: z.string(),
-    location: z.string().optional()
+    location: z.string().optional() // Coordenadas o link para maps
   }),
   dressCode: z.string().optional(),
   language: z.enum(['es', 'en', 'pt']),
@@ -40,16 +40,17 @@ export const CreateInvitationDTO = z.object({
   status: z.enum(['active', 'expired', 'archived']).optional()
 });
 
-// ✅ Tipo inferido de TypeScript
+// ✔️ Tipo para TypeScript
 export type CreateInvitationDTOType = z.infer<typeof CreateInvitationDTO>;
 
-// ✏️ Para actualizar (todos los campos opcionales)
+// ✏️ DTO para actualizar invitación (todos los campos opcionales)
 export const UpdateInvitationDTO = CreateInvitationDTO.partial();
 export type UpdateInvitationDTOType = z.infer<typeof UpdateInvitationDTO>;
 
-// 🧾 Para respuestas del backend (opcional, si querés tenerlo separado de Mongoose)
+// 🧾 Para respuesta (si no querés usar el model completo en respuesta pública)
 export type InvitationResponseDTO = CreateInvitationDTOType & {
   _id: string;
   createdAt: Date;
   updatedAt: Date;
 };
+

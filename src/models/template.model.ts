@@ -17,8 +17,9 @@ export interface ITemplate extends Document {
     locationMap: boolean;
     musicSuggestion: boolean;
     rsvpNotes: boolean;
-    gallery: boolean;
+    giftSuggestion: boolean;
     notes: boolean;
+    gallery: boolean;
   };
   isPremium: boolean;
   isActive: boolean;
@@ -61,8 +62,9 @@ const TemplateSchema: Schema = new Schema(
       locationMap: { type: Boolean, default: true },
       musicSuggestion: { type: Boolean, default: true },
       rsvpNotes: { type: Boolean, default: true },
-      gallery: { type: Boolean, default: true },
-      notes: { type: Boolean, default: true }
+      giftSuggestion: { type: Boolean, default: true },
+      notes: { type: Boolean, default: true },
+      gallery: { type: Boolean, default: true }
     },
     isPremium: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
