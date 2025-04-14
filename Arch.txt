@@ -13,50 +13,52 @@ Dinvit_BackEnd/
     │
     ├───config/
     │   └── db.ts
+    │   └── env.ts                # Validación de variables con Zod
     │
-    ├───dao/
-    │   └── invitation.dao.ts
-    │   └── guestAction.dao.ts
-    │   └── user.dao.ts
-    │   └── template.dao.ts
-    │   └── token.dao.ts
+    ├───modules/
+    │   ├───auth/
+    │   │   ├───controllers/
+    │   │   ├───services/
+    │   │   ├───routes/
+    │   │   ├───dtos/
+    │   │   ├───middlewares/
+    │   │   └───dao/
+    │   │       └── token.dao.ts
     │
-    ├───services/
-    │   └── auth.service.ts
-    │   └── invitation.service.ts
-    │   └── guestAction.service.ts
-    │   └── user.service.ts
-    │   └── template.service.ts
-    │   └── token.service.ts
+    │   ├───users/
+    │   │   ├───controllers/
+    │   │   ├───services/
+    │   │   ├───routes/
+    │   │   ├───dtos/
+    │   │   ├───middlewares/
+    │   │   └───dao/
+    │   │       └── user.dao.ts
     │
-    ├───controllers/
-    │   └── auth.controller.ts
-    │   └── invitation.controller.ts
-    │   └── guestAction.controller.ts
-    │   └── user.controller.ts
-    │   └── template.controller.ts
-    │   └── token.controller.ts
+    │   ├───invitations/
+    │   │   ├───controllers/
+    │   │   ├───services/
+    │   │   ├───routes/
+    │   │   ├───dtos/
+    │   │   ├───middlewares/
+    │   │   └───dao/
+    │   │       └── invitation.dao.ts
     │
-    ├───routes/
-    │   └── auth.routes.ts
-    │   └── invitation.routes.ts
-    │   └── guestAction.routes.ts
-    │   └── user.routes.ts
-    │   └── template.routes.ts
-    │   └── token.routes.ts
+    │   ├───guestActions/
+    │   │   ├───controllers/
+    │   │   ├───services/
+    │   │   ├───routes/
+    │   │   ├───dtos/
+    │   │   ├───middlewares/
+    │   │   └───dao/
+    │   │       └── guestAction.dao.ts
     │
-    ├───middlewares/
-    │   └── auth.middleware.ts
-    │   └── role.middleware.ts          # (si aplica)
-    │   └── validation.middleware.ts
-    │   └── error.middleware.ts
-    │
-    ├───dtos/
-    │   └── auth.dto.ts
-    │   └── invitation.dto.ts
-    │   └── guestAction.dto.ts
-    │   └── user.dto.ts
-    │   └── template.dto.ts
+    │   ├───templates/
+    │   │   ├───controllers/
+    │   │   ├───services/
+    │   │   ├───routes/
+    │   │   ├───dtos/
+    │   │   └───dao/
+    │   │       └── template.dao.ts
     │
     ├───models/
     │   └── invitation.model.ts
@@ -67,10 +69,11 @@ Dinvit_BackEnd/
     │
     └───utils/
         └── jwt.ts
-        └── mailer.ts         # (ej. nodemailer)
         └── logger.ts
+        └── mailer.ts
         └── generateToken.ts
         └── constants.ts
+
 
 
 ================================================
