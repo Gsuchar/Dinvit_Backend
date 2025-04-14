@@ -1,3 +1,5 @@
+/* VERSION DISCONTINUADA AL 13/4/2025 */
+--------------------------------------------
 Dinvit_BackEnd
 │   package.json
 │   tsconfig.json
@@ -35,3 +37,4 @@ Dinvit_BackEnd
             auth.service.ts
             event.service.ts
             invitation.service.ts
+---------------------------------------

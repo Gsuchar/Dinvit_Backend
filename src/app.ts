@@ -3,7 +3,6 @@ import cors from 'cors';
 import passport from 'passport';
 import { errorHandler } from './middlewares/error.middleware';
 import authRoutes from './routes/auth.routes';
-import eventRoutes from './routes/event.routes';
 import invitationRoutes from './routes/invitation.routes';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
