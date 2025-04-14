@@ -1,3 +1,91 @@
+================================================
+=== VERSION AL 13/04/25 ========================
+
+Dinvit_BackEnd/
+│   package.json
+│   tsconfig.json
+│   .env
+│   swagger.yaml
+│
+└───src/
+    │   app.ts
+    │   server.ts
+    │
+    ├───config/
+    │   └── db.ts
+    │
+    ├───dao/
+    │   └── invitation.dao.ts
+    │   └── guestAction.dao.ts
+    │   └── user.dao.ts
+    │   └── template.dao.ts
+    │   └── token.dao.ts
+    │
+    ├───services/
+    │   └── auth.service.ts
+    │   └── invitation.service.ts
+    │   └── guestAction.service.ts
+    │   └── user.service.ts
+    │   └── template.service.ts
+    │   └── token.service.ts
+    │
+    ├───controllers/
+    │   └── auth.controller.ts
+    │   └── invitation.controller.ts
+    │   └── guestAction.controller.ts
+    │   └── user.controller.ts
+    │   └── template.controller.ts
+    │   └── token.controller.ts
+    │
+    ├───routes/
+    │   └── auth.routes.ts
+    │   └── invitation.routes.ts
+    │   └── guestAction.routes.ts
+    │   └── user.routes.ts
+    │   └── template.routes.ts
+    │   └── token.routes.ts
+    │
+    ├───middlewares/
+    │   └── auth.middleware.ts
+    │   └── role.middleware.ts          # (si aplica)
+    │   └── validation.middleware.ts
+    │   └── error.middleware.ts
+    │
+    ├───dtos/
+    │   └── auth.dto.ts
+    │   └── invitation.dto.ts
+    │   └── guestAction.dto.ts
+    │   └── user.dto.ts
+    │   └── template.dto.ts
+    │
+    ├───models/
+    │   └── invitation.model.ts
+    │   └── guestAction.model.ts
+    │   └── user.model.ts
+    │   └── template.model.ts
+    │   └── token.model.ts
+    │
+    └───utils/
+        └── jwt.ts
+        └── mailer.ts         # (ej. nodemailer)
+        └── logger.ts
+        └── generateToken.ts
+        └── constants.ts
+
+
+================================================
+================================================
+
+
+
+
+
+
+
+
+
+
+
 /* VERSION DISCONTINUADA AL 13/4/2025 */
 --------------------------------------------
 Dinvit_BackEnd
