@@ -22,9 +22,9 @@ app.use(passport.initialize());
 //const swaggerDocument = YAML.load(path.join(__dirname, '../swagger.yaml'));
 //app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Rutas de la API
+// Rutas de la API (FALTAN ACTUALIZAR)
 app.use('/api/auth', authRoutes);
-app.use('/api/events', eventRoutes);
+app.use('/api/templates', templateRoutes);
 app.use('/api/invitations', invitationRoutes);
 
 // Middleware para manejo de errores
