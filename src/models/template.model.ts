@@ -77,4 +77,8 @@ const TemplateSchema: Schema = new Schema(
   { timestamps: true }
 );
 
+// Indices recomendados para optimización de consultas
+TemplateSchema.index({ category: 1 });
+
+
 export default mongoose.model<ITemplate>('Template', TemplateSchema);

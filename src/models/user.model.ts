@@ -54,4 +54,8 @@ const UserSchema: Schema = new Schema(
   { timestamps: true }
 );
 
+// Indices recomendados para optimización de consultas
+UserSchema.index({ socialId: 1 });
+UserSchema.index({ status: 1 });
+
 export default mongoose.model<IUser>('User', UserSchema);

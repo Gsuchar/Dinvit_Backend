@@ -26,10 +26,11 @@ const GuestActionSchema: Schema = new Schema(
     invitationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Invitation',
-      required: true
+      required: true,
+      index: true // Mejora de rendimiento
     },
     name: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, required: true, index: true }, // Busqueda rápida por email
     phone: { type: String, required: true },
     companions: {
       count: { type: Number, default: 0 },
@@ -55,7 +56,38 @@ const GuestActionSchema: Schema = new Schema(
 export default mongoose.model<IGuestAction>('GuestAction', GuestActionSchema);
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
+
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IGuestAction extends Document {
